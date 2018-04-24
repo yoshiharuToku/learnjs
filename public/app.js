@@ -1,2 +1,2 @@
-'use starict';
+'use strict';
 var learnjs = {};
