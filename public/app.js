@@ -1,0 +1,2 @@
+'use starict';
+var learnjs={};
