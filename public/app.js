@@ -1,2 +1,2 @@
 'use starict';
-var learnjs={};
+var learnjs = {};
