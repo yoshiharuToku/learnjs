@@ -12,6 +12,10 @@
     <style type="text/css" media="all">
       body { margin-top: 30px; }
     </style>
+    <style type="text/css" media="all">
+      body { margin-top: 30px; }
+      .templates { display: none; }
+    </style>
   </head>
   <body>
     <div class='markup'>
@@ -28,9 +32,14 @@
           </div>
         </div>
       </div>
+      <div class='templates'>
+        <div class='problem-view'>
+          <h3 class='title'></h3>
+        </div>
+      </div>
     </div>
     <script>
-      $(windows).ready(learnjs.appOnready);
+      $(window).ready(learnjs.appOnready);
     </script>
   </body>
 </html>
