@@ -9,14 +9,13 @@ learnjs.problemView = function() {
 learnjs.showView = function(hash) {
 //  console.log(hash);
   var routes = {
-    '#problem-1': learnjs.problemView
+    '#problem': learnjs.problemView
   }
-  var viewFn = routes[hash];
+  var hashParts = hash.split('-');
+  var viewFn = routes[hashParts[0]];
 //  console.log(viewFn());
   if (viewFn) {
 //    console.log(viewFn());
-    $('.view-container').empty().append(viewFn());
+    $('.view-container').empty().append(viewFn(hashParts[1]));
   }
-//  var problemView = $('<div class="problem-view">').text('Coming soon!');
-//  $('.view-container').empty().append(problemView);
 }
