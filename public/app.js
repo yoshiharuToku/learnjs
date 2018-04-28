@@ -17,11 +17,13 @@ learnjs.problemView = function(data) {
 
   function checkAnswerClick() {
     if (checkAnswer()) {
-      learnjs.flashElement(resultFlash, 'Correct!');
-//      resultFlash.text('Correct!');
+      var correctFlash = learnjs.template('correct-flash');
+      correctFlash.find('a').attr('href', '#problem-' + (problemNumber + 1));
+      console.log(correctFlash.find('a').attr('href'));
+      learnjs.flashElement(resultFlash, correctFlash);
+//      learnjs.flashElement(resultFlash, 'Correct!');
     } else {
       learnjs.flashElement(resultFlash, 'Incorrect!');
-//      resultFlash.text('Incorrect!');
     }
   }
 
@@ -77,3 +79,7 @@ learnjs.flashElement = function(elem, content) {
     elem.fadeIn();
   });
 };
+
+learnjs.template = function(name) {
+  return $('.templates .' + name).clone();
+}
