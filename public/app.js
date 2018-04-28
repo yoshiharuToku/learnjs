@@ -4,8 +4,26 @@ var learnjs = {};
 
 learnjs.problemView = function(data) {
   var problemNumber = parseInt(data, 10);
-//  console.log(problemNumber);
   var view = $('.templates .problem-view').clone();
+  var problemData = learnjs.problems[problemNumber-1];
+  var resultFlash = view.find('.result');
+  console.log('>>> problemView')
+
+  function checkAnswer() {
+    var answer = view.find('.answer').val();
+    var test = problemData.code.replace('__', answer) + '; problem();';
+    return eval(test);
+  }
+
+  function checkAnswerClick() {
+    if (checkAnswer()) {
+      resultFlash.text('Correct!');
+    } else {
+      resultFlash.text('Incorrect!');
+    }
+  }
+
+  view.find('.check-btn').click(checkAnswerClick);
   view.find('.title').text('Problem #' + problemNumber);
   learnjs.applyObject(learnjs.problems[problemNumber-1], view);
   return view;
