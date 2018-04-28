@@ -47,15 +47,18 @@ describe('LearnJS', function() {
   describe('answer section', function() {
     it('can check a correct answer by hitteing abutton', function() {
       var view = learnjs.problemView('1');
+//      console.log(view);
       view.find('.answer').val('true');
-      view.find('check-btn').click();
-      expect(view.find('.result').text()).toEqual('Correct');
+      view.find('.check-btn').click();
+//      console.log(view.find('.answer').val());
+//      console.log(view.find('.result').text());
+      expect(view.find('.result').text()).toEqual('Correct!');
     });
     it('rejects an incorrect answer', function() {
       var view = learnjs.problemView('1');
       view.find('.answer').val('false');
-      view.find('check-btn').click();
-      expect(view.find('.result').text()).toEqual('Incorrect');
+      view.find('.check-btn').click();
+      expect(view.find('.result').text()).toEqual('Incorrect!');
     });
   });
 

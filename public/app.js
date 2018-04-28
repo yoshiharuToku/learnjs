@@ -7,7 +7,7 @@ learnjs.problemView = function(data) {
   var view = $('.templates .problem-view').clone();
   var problemData = learnjs.problems[problemNumber-1];
   var resultFlash = view.find('.result');
-  console.log('>>> problemView')
+//  console.log('>>> problemView')
 
   function checkAnswer() {
     var answer = view.find('.answer').val();
