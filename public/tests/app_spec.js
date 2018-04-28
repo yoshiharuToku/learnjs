@@ -14,9 +14,9 @@ describe('LearnJS', function() {
   });
 
   describe('problem view', function() {
-    it('has atitle that includes the problem number', function() {
+    it('has a title that includes the problem number', function() {
       var view = learnjs.problemView('1');
-      expect(view.text()).toEqual('Problem #1 Coming soon!');
+      expect(view.find('.title').text()).toEqual('Problem #1');
     });
   });
 
@@ -31,5 +31,14 @@ describe('LearnJS', function() {
     spyOn(learnjs, 'showView');
     $(window).trigger('hashchange');
     expect(learnjs.showView).toHaveBeenCalledWith(window.location.hash);
-  })
+  });
+
+  it('show the TableDescription', function() {
+    var view = learnjs.problemView('1');
+    expect(view.find('[data-name="description"]').text()).toEqual('What is truth');
+  });
+  it('show the problem code', function() {
+    var view = learnjs.problemView('1');
+    expect(view.find('[data-name="code"]').text()).toEqual('function problem() { return __; }');
+  });
 });

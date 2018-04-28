@@ -2,12 +2,13 @@
 
 var learnjs = {};
 
-learnjs.problemView = function(problemNumber) {
+learnjs.problemView = function(data) {
+  var problemNumber = parseInt(data, 10);
+//  console.log(problemNumber);
   var view = $('.templates .problem-view').clone();
-  view.find('.title').text('Problem #' + problemNumber + ' Coming soon!');
+  view.find('.title').text('Problem #' + problemNumber);
+  learnjs.applyObject(learnjs.problems[problemNumber-1], view);
   return view;
-//  var title = 'Problem #' + problemNumber + ' Coming soon!';
-//  return $('<div class="problem-view">').text(title);
 }
 
 learnjs.showView = function(hash) {
@@ -43,3 +44,9 @@ learnjs.problems = [
   }
 ];
 //}
+
+learnjs.applyObject = function(obj, elem) {
+  for (var key in obj) {
+    elem.find('[data-name="' + key + '"]').text(obj[key]);
+  }
+}
