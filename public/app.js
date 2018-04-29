@@ -34,15 +34,17 @@ learnjs.problemView = function(data) {
 }
 
 learnjs.showView = function(hash) {
-//  console.log(hash);
+//  console.log("hash = " + hash);
   var routes = {
-    '#problem': learnjs.problemView
+    '#problem': learnjs.problemView,
+    '':learnjs.landingView
   }
   var hashParts = hash.split('-');
+//  console.log(hashParts[1]);
   var viewFn = routes[hashParts[0]];
 //  console.log(viewFn());
   if (viewFn) {
-//    console.log(viewFn());
+//    console.log(viewFn(hashParts[1]).text());
     $('.view-container').empty().append(viewFn(hashParts[1]));
   }
 }
@@ -94,4 +96,9 @@ learnjs.buildCorrectFlash = function(problemNum) {
     link.text("You're Finished");
   }
   return correctFlash;
+}
+
+learnjs.landingView = function() {
+//  console.log('>landingView')
+  return learnjs.template('landing-view');
 }
