@@ -17,11 +17,11 @@ learnjs.problemView = function(data) {
 
   function checkAnswerClick() {
     if (checkAnswer()) {
-      var correctFlash = learnjs.template('correct-flash');
-      correctFlash.find('a').attr('href', '#problem-' + (problemNumber + 1));
-      console.log(correctFlash.find('a').attr('href'));
+      var correctFlash = learnjs.buildCorrectFlash(problemNumber);
+  //    var correctFlash = learnjs.template('correct-flash');
+  //    correctFlash.find('a').attr('href', '#problem-' + (problemNumber + 1));
+  //    console.log(correctFlash);
       learnjs.flashElement(resultFlash, correctFlash);
-//      learnjs.flashElement(resultFlash, 'Correct!');
     } else {
       learnjs.flashElement(resultFlash, 'Incorrect!');
     }
@@ -71,15 +71,27 @@ learnjs.applyObject = function(obj, elem) {
   for (var key in obj) {
     elem.find('[data-name="' + key + '"]').text(obj[key]);
   }
-};
+}
 
 learnjs.flashElement = function(elem, content) {
   elem.fadeOut('fast', function() {
     elem.html(content);
     elem.fadeIn();
   });
-};
+}
 
 learnjs.template = function(name) {
   return $('.templates .' + name).clone();
+}
+
+learnjs.buildCorrectFlash = function(problemNum) {
+  var correctFlash = learnjs.template('correct-flash');
+  var link = correctFlash.find('a');
+  if (problemNum < learnjs.problems.length) {
+    link.attr('href', '#problem-' + (problemNum + 1));
+  } else {
+    link.attr('href', '');
+    link.text("You're Finished");
+  }
+  return correctFlash;
 }
