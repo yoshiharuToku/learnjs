@@ -18,9 +18,6 @@ learnjs.problemView = function(data) {
   function checkAnswerClick() {
     if (checkAnswer()) {
       var correctFlash = learnjs.buildCorrectFlash(problemNumber);
-  //    var correctFlash = learnjs.template('correct-flash');
-  //    correctFlash.find('a').attr('href', '#problem-' + (problemNumber + 1));
-  //    console.log(correctFlash);
       learnjs.flashElement(resultFlash, correctFlash);
     } else {
       learnjs.flashElement(resultFlash, 'Incorrect!');
@@ -30,6 +27,17 @@ learnjs.problemView = function(data) {
   view.find('.check-btn').click(checkAnswerClick);
   view.find('.title').text('Problem #' + problemNumber);
   learnjs.applyObject(learnjs.problems[problemNumber-1], view);
+
+//  console.log(problemNumber + ", " + learnjs.problems.length);
+  if (problemNumber < learnjs.problems.length) {
+    var buttonItem = learnjs.template('skip-btn');
+    buttonItem.find('a').attr('href', '#problem-' + (problemNumber + 1));
+//    console.log(buttonItem);
+    $('.nav-list').append(buttonItem);
+    view.bind('removingView', function() {
+      buttonItem.remove();
+    });
+  }
   return view;
 }
 
@@ -48,6 +56,8 @@ learnjs.showView = function(hash) {
 //    console.log(viewFn(hashParts[1]).text());
     $('.view-container').empty().append(viewFn(hashParts[1]));
   }
+  learnjs.triggerEvent('removingView', []);
+  $('.view-container').empty().append(viewFn(hashParts[1]));
 }
 
 learnjs.appOnReady = function() {
@@ -102,4 +112,8 @@ learnjs.buildCorrectFlash = function(problemNum) {
 learnjs.landingView = function() {
 //  console.log('>landingView')
   return learnjs.template('landing-view');
+}
+
+learnjs.triggerEvent = function(name, args) {
+  $('.view-container>*').trigger(name, args);
 }
