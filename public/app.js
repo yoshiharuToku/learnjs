@@ -117,3 +117,7 @@ learnjs.landingView = function() {
 learnjs.triggerEvent = function(name, args) {
   $('.view-container>*').trigger(name, args);
 }
+
+function googleSignIn() {
+  console.log(arguments);
+}
