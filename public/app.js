@@ -1,6 +1,9 @@
 'use strict';
 
-var learnjs = {};
+//var learnjs = {};
+var learnjs = {
+  poolId: 'ap-northeast-1_QXVqwFNtI'
+};
 
 learnjs.problemView = function(data) {
   var problemNumber = parseInt(data, 10);
@@ -118,6 +121,16 @@ learnjs.triggerEvent = function(name, args) {
   $('.view-container>*').trigger(name, args);
 }
 
-function googleSignIn() {
-  console.log(arguments);
+function googleSignIn(googleUser) {
+//  console.log(arguments);
+  var id_token = googleUser.getAuthResponse().id_token;
+  AWS.config.update({
+    region: 'ap-northeast-1',
+    credentials: new AWS.CognitoIdentityCredentials({
+      IdentityPoolId: learnjs.poolId,
+      Logins: {
+         'account.google.com': id_token
+      }
+    })
+  })
 }
